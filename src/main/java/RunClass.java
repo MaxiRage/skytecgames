@@ -17,7 +17,7 @@ public class RunClass {
         new Treasury().start();
 
         //Создаём 10 юзеров
-        int countUsers = 10;
+        int countUsers = 100;
 
         while (countUsers > 0) {
             new Users().start();

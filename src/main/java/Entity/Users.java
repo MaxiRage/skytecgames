@@ -12,8 +12,8 @@ import java.sql.Statement;
 public class Users extends Thread {
     private final String name_users = "PLAYER_";
     private final String name_clans = "PowerRangers";
-    private final int skill_Arena = (int) (Math.random() * 10);
-    private final int skill_Gamble = (int) (Math.random() * 30);
+    private final int skill_Arena = (int) (Math.random() * 10) + 1;
+    private final int skill_Gamble = (int) (Math.random() * 30)+ 1;
     private final int balances = 300;
     private static int count = 0;
 
@@ -21,7 +21,7 @@ public class Users extends Thread {
     @Override
     public void run() {
         String nameUser = createNewUser();
-        new JoiningClan().feeTreasury(nameUser);
+//        new JoiningClan().feeTreasury(nameUser);
     }
 
     private synchronized String createNewUser() throws SQLException {
@@ -53,5 +53,53 @@ public class Users extends Thread {
             resultSet.close();
         }
         return user_id;
+    }
+
+    @SneakyThrows
+    public int getUserBalance(String nameUser) {
+        int balanceUser = 0;
+        try (Connection connection = ManagementTables.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            String requestBalanceUser = String.format("SELECT balances FROM USERS " +
+                    "WHERE name_users = '%s'", nameUser);
+
+            ResultSet resultSet = statement.executeQuery(requestBalanceUser);
+
+            while (resultSet.next()) {
+                balanceUser = resultSet.getInt("balances");
+            }
+
+            resultSet.close();
+        }
+        return balanceUser;
+    }
+
+    @SneakyThrows
+    public int getSkillArena(String nameUser) {
+        int skillArena = 0;
+        try (Connection connection = ManagementTables.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            String requestBalanceUser = String.format("SELECT skill_arena FROM USERS " +
+                    "WHERE name_users = '%s'", nameUser);
+
+            ResultSet resultSet = statement.executeQuery(requestBalanceUser);
+
+            while (resultSet.next()) {
+                skillArena = resultSet.getInt("skill_arena");
+            }
+
+            resultSet.close();
+        }
+        return skillArena;
+    }
+
+    @SneakyThrows
+    public void updateBalanceUsers(int amount, String nameUser) {
+        try (Connection connection = ManagementTables.getConnection()) {
+            String SQLRequest = String.format("UPDATE users SET balances=balances-%d WHERE name_users = '%s'", amount, nameUser);
+            ManagementTables.statement(connection, SQLRequest);
+        }
     }
 }

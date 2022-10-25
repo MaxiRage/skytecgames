@@ -17,7 +17,7 @@ public class UsersTable extends AbstarctTable {
                 nameClan + " VARCHAR(50) NOT NULL, " +
                 skillArena + " INTEGER NOT NULL, " +
                 skillGamble + " INTEGER NOT NULL, " +
-                balance + " DECIMAL(15,2) NOT NULL)";
+                balance + " DECIMAL(10,2) NOT NULL)";
     }
 
     @Override

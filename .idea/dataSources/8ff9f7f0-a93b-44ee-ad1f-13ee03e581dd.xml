@@ -246,7 +246,7 @@
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(1)..2147483647</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(2)..2147483647</SequenceSequenceIdentity>
     </column>
     <column id="180" parent="165" name="NAME_CLANS">
       <DataType>CHARACTER VARYING(50)|0s</DataType>
@@ -274,7 +274,7 @@
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(65)..2147483647</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(11)..2147483647</SequenceSequenceIdentity>
     </column>
     <column id="185" parent="166" name="NAME_USERS">
       <DataType>CHARACTER VARYING(50)|0s</DataType>

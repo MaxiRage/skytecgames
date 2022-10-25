@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="Создание моделей БД + SQL запросов">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Actions/EnamActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/ManagementTables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/Model/AbstarctTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Treasury.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="fix models DB&#10;add Entity Users, Treasury&#10;add Threds">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8ff9f7f0-a93b-44ee-ad1f-13ee03e581dd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8ff9f7f0-a93b-44ee-ad1f-13ee03e581dd.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/CreateTablesH2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Actions/EnamActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Actions/EnamActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunClass.java" afterDir="false" />
@@ -34,6 +29,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -72,7 +72,7 @@
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JoiningClan">
+  <component name="RunManager" selected="Application.RunClass">
     <configuration name="DetailsTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DB.Model.DetailsTable" />
       <module name="skytecgames" />
@@ -134,11 +134,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.JoiningClan" />
         <item itemvalue="Application.RunClass" />
-        <item itemvalue="Application.Entity.Users" />
-        <item itemvalue="Application.Entity.Users$test" />
-        <item itemvalue="Application.DB.Model.DetailsTable" />
+        <item itemvalue="Application.JoiningClan" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +149,9 @@
       <updated>1666542457581</updated>
       <workItem from="1666542461098" duration="5634000" />
       <workItem from="1666552102196" duration="14287000" />
-      <workItem from="1666600272713" duration="26076000" />
+      <workItem from="1666600272713" duration="26668000" />
+      <workItem from="1666692723020" duration="312000" />
+      <workItem from="1666718667158" duration="7619000" />
     </task>
     <task id="LOCAL-00001" summary="Создание моделей БД + SQL запросов">
       <created>1666573623178</created>
@@ -161,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666573623178</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix models DB&#10;add Entity Users, Treasury&#10;add Threds">
+      <created>1666663487362</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666663487362</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +186,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Создание моделей БД + SQL запросов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Создание моделей БД + SQL запросов" />
+    <MESSAGE value="fix models DB&#10;add Entity Users, Treasury&#10;add Threds" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix models DB&#10;add Entity Users, Treasury&#10;add Threds" />
   </component>
 </project>

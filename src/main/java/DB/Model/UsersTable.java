@@ -13,7 +13,7 @@ public class UsersTable extends AbstarctTable {
         final String balance = "balances";
 
         return super.createTable() +
-                nameUsers + " VARCHAR(50) NOT NULL, " + // TODO UNIQUE
+                nameUsers + " VARCHAR(50) NOT NULL UNIQUE, " +
                 nameClan + " VARCHAR(50) NOT NULL, " +
                 skillArena + " INTEGER NOT NULL, " +
                 skillGamble + " INTEGER NOT NULL, " +

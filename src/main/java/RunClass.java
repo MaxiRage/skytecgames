@@ -23,6 +23,5 @@ public class RunClass {
             new Users().start();
             countUsers--;
         }
-
     }
 }

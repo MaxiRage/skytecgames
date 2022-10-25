@@ -1,50 +1,61 @@
 package Actions;
 
 import DB.ManagementTables;
+import Entity.Users;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 
-public class JoiningClan extends Thread{
+public class JoiningClan {
+    int amountForJoining = 25;
 
     @SneakyThrows
-    public synchronized static void feeTreasury(int users_id) {
+    public void feeTreasury(String nameUser) {
+
         try (Connection connection = ManagementTables.getConnection()) {
 
-            double amountForJoining = 25;
-            String balanceUser = String.format("SELECT balances FROM USERS " +
-                    "WHERE users_id = %d", users_id); // TODO Сделать возврат суммы
-            ManagementTables.statement(connection, balanceUser);
+            double balanceUser = getUserBalance(nameUser);
 
-            System.out.println(balanceUser);
-            if (Double.parseDouble(balanceUser) > amountForJoining) {
-                String SQLRequestUsers = String.format("UPDATE users SET balances=balances-%f " +
-                        "WHERE users_id = 1", amountForJoining);
-                String SQLRequestTreasury = String.format("UPDATE treasure SET balances=balances+%f " +
+            if (balanceUser > amountForJoining) {
+                String SQLRequestUsers = String.format("UPDATE users SET balances=balances-%d " +
+                        "WHERE name_users = '%s'", amountForJoining, nameUser);
+                String SQLRequestTreasury = String.format("UPDATE treasury SET balances=balances+%d " +
                         "WHERE TREASURY_ID = 1", amountForJoining);
                 String SQLRequestDetails = String.format("INSERT INTO details (timetransaction, users_id, action, amount, treasury_id) " +
-                        "VALUES ('%s', %d, '%s', %f, %d)", LocalDateTime.now(), users_id, EnamActions.JOININGCLAN, amountForJoining, 1);
+                        "VALUES ('%s', %d, '%s', %d, %d)", LocalDateTime.now(), new Users().getUserId(nameUser), EnamActions.JOININGCLAN, amountForJoining, 1);
                 String SQLRequest = SQLRequestUsers + "; "
                         + SQLRequestTreasury + "; "
                         + SQLRequestDetails;
                 ManagementTables.statement(connection, SQLRequest);
-            }
-            else System.out.println("Не хватает средств на членство");
+            } else System.out.println("Не хватает средств на членство");
 
             System.out.printf("Поток " + Thread.currentThread() + " в работе: " +
-                    "Юзер %d выполнил %s и заплатил %d в КАЗНУ \n"
-                    , users_id, EnamActions.JOININGCLAN, amountForJoining);
-
+                            "Пользователь %s вступил в клан \"PowerRangers\" и заплатил %d в КАЗНУ \n"
+                    , nameUser, amountForJoining);
         }
     }
 
-    @Override
-    public void run() {
-        feeTreasury(1);
-    }
+    public double getUserBalance(String nameUser) throws SQLException {
+        double balanceUser = 0;
+        try (Connection connection = ManagementTables.getConnection()) {
 
-    public static void main(String[] args) {
-        new JoiningClan().start();
+            Statement statement = connection.createStatement();
+
+            String requestBalanceUser = String.format("SELECT balances FROM USERS " +
+                    "WHERE name_users = '%s'", nameUser);
+
+            ResultSet resultSet = statement.executeQuery(requestBalanceUser);
+
+            while (resultSet.next()) {
+                balanceUser = resultSet.getInt("balances");
+            }
+
+            resultSet.close();
+        }
+        return balanceUser;
     }
 }

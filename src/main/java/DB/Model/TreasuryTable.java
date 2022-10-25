@@ -1,24 +1,27 @@
 package DB.Model;
 
-public class TreasuryTable {
-    private static final String nameTable = "treasury";
-    private static final String nameClan = "name_Clans";
-    private static final String balance = "balances";
+public class TreasuryTable extends AbstarctTable {
+    String nameTable = "treasury";
 
-    public static String createTreasuryTable() {
-
-        System.out.println("CREATE TABLE Treasury");
-
-        return "CREATE TABLE " + nameTable + " (" +
-                nameTable + "_ID INTEGER AUTO_INCREMENT PRIMARY KEY, " +
+    @Override
+    public String createTable() {
+        super.nameTable = this.nameTable;
+        final String balance = "balances";
+        final String nameClan = "name_Clans";
+        return super.createTable() +
                 nameClan + " VARCHAR(50) NOT NULL, " +
                 balance + " DECIMAL(15,2) NOT NULL)";
     }
 
-    public static String dropTreasuryTable() {
-        System.out.println("DROP TABLE Treasury");
+    @Override
+    public String dropTable() {
+        super.nameTable = this.nameTable;
+        return super.dropTable();
+    }
 
-        return "DROP TABLE " +
-                nameTable;
+    @Override
+    public String truncateTable() {
+        super.nameTable = this.nameTable;
+        return super.truncateTable();
     }
 }

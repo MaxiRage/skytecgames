@@ -4,23 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/CreateTablesH2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/RunClass.java" afterDir="false" />
+    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="Создание моделей БД + SQL запросов">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Actions/EnamActions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DB/ManagementTables.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DB/Model/AbstarctTable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Treasury.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/CreateTablesH2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunClass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +29,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -47,24 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/iaros/IdeaProjects/skytecgames/src/main/resources/lib",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/iaros/IdeaProjects/skytecgames/src/main/resources/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\lib" />
@@ -74,20 +72,46 @@
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DB.CreateTablesH2">
-    <configuration name="DB.CreateTablesH2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DB.CreateTablesH2" />
+  <component name="RunManager" selected="Application.JoiningClan">
+    <configuration name="DetailsTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DB.Model.DetailsTable" />
+      <module name="skytecgames" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DB.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JoiningClan" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Actions.JoiningClan" />
+      <module name="skytecgames" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Actions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RunClass" />
       <module name="skytecgames" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DB.Model.UsersTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DB.Model.UsersTable" />
+    <configuration name="Users$test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Entity.Users$test" />
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="DB.Model.*" />
+          <option name="PATTERN" value="Actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -100,7 +124,7 @@
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Entity.*" />
+          <option name="PATTERN" value="Actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -110,9 +134,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DB.CreateTablesH2" />
-        <item itemvalue="Application.Users" />
-        <item itemvalue="Application.DB.Model.UsersTable" />
+        <item itemvalue="Application.JoiningClan" />
+        <item itemvalue="Application.RunClass" />
+        <item itemvalue="Application.Entity.Users" />
+        <item itemvalue="Application.Entity.Users$test" />
+        <item itemvalue="Application.DB.Model.DetailsTable" />
       </list>
     </recent_temporary>
   </component>
@@ -125,8 +151,17 @@
       <option name="presentableId" value="Default" />
       <updated>1666542457581</updated>
       <workItem from="1666542461098" duration="5634000" />
-      <workItem from="1666552102196" duration="13775000" />
+      <workItem from="1666552102196" duration="14287000" />
+      <workItem from="1666600272713" duration="26076000" />
     </task>
+    <task id="LOCAL-00001" summary="Создание моделей БД + SQL запросов">
+      <created>1666573623178</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666573623178</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +177,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Создание моделей БД + SQL запросов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Создание моделей БД + SQL запросов" />
   </component>
 </project>

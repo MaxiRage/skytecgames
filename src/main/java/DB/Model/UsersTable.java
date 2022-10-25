@@ -1,35 +1,34 @@
 package DB.Model;
 
-import lombok.Getter;
+public class UsersTable extends AbstarctTable {
+    String nameTable = "users";
 
-/*
-Создание таблицы пользователей
- */
-public class UsersTable {
-    private static final String nameTable = "users";
-    private static final String nameUsers = "name_Users";
-    private static final String nameClan = "name_Clans";
-    private static final String skillArena = "skill_Arena";
-    private static final String skillGamble = "skill_Gamble";
-    private static final String balance = "balances";
+    @Override
+    public String createTable() {
+        super.nameTable = this.nameTable;
+        final String nameUsers = "name_Users";
+        final String nameClan = "name_Clans";
+        final String skillArena = "skill_Arena";
+        final String skillGamble = "skill_Gamble";
+        final String balance = "balances";
 
-    public static String createUserTable() {
-
-        System.out.println("CREATE TABLE Users");
-
-        return "CREATE TABLE " + nameTable + " (" +
-                nameTable + "_ID INTEGER AUTO_INCREMENT PRIMARY KEY, " +
-                nameUsers + " VARCHAR(50) NOT NULL, " +
+        return super.createTable() +
+                nameUsers + " VARCHAR(50) NOT NULL, " + // TODO UNIQUE
                 nameClan + " VARCHAR(50) NOT NULL, " +
                 skillArena + " INTEGER NOT NULL, " +
                 skillGamble + " INTEGER NOT NULL, " +
                 balance + " DECIMAL(15,2) NOT NULL)";
     }
 
-    public static String dropUserTable() {
-        System.out.println("DROP TABLE Users");
+    @Override
+    public String dropTable() {
+        super.nameTable = this.nameTable;
+        return super.dropTable();
+    }
 
-        return "DROP TABLE " +
-                nameTable;
+    @Override
+    public String truncateTable() {
+        super.nameTable = this.nameTable;
+        return super.truncateTable();
     }
 }

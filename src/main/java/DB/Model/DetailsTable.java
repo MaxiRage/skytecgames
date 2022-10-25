@@ -1,19 +1,17 @@
 package DB.Model;
 
-public class DetailsTable {
-    private static final String nameTable = "details";
-    private static final String timeTransaction = "timeTransaction";
-    private static final String users_id = "users_id";
-    private static final String action = "action";
-    private static final String amount = "amount";
-    private static final String treasury_id = "treasury_id"; // FK Treasure
+public class DetailsTable extends AbstarctTable {
 
-    public static String createDetailsTable() {
-
-        System.out.println("CREATE TABLE Details");
-
-        return "CREATE TABLE " + nameTable + " (" +
-                nameTable + "_ID INTEGER AUTO_INCREMENT PRIMARY KEY, " +
+    String nameTable = "details";
+    @Override
+    public String createTable() {
+        super.nameTable = this.nameTable;
+        final String timeTransaction = "timeTransaction";
+        final String users_id = "users_id";
+        final String action = "action";
+        final String amount = "amount";
+        final String treasury_id = "treasury_id";
+        return super.createTable() +
                 timeTransaction + " TIMESTAMP NOT NULL, " +
                 users_id + " INTEGER NOT NULL, " +
                 action + " VARCHAR(50) NOT NULL, " +
@@ -23,10 +21,15 @@ public class DetailsTable {
                 "FOREIGN KEY (" + treasury_id + ") REFERENCES Treasury (" + treasury_id + "))";
     }
 
-    public static String dropDetailsTable() {
-        System.out.println("DROP TABLE Details");
+    @Override
+    public String dropTable() {
+        super.nameTable = this.nameTable;
+        return super.dropTable();
+    }
 
-        return "DROP TABLE " +
-                nameTable;
+    @Override
+    public String truncateTable() {
+        super.nameTable = this.nameTable;
+        return super.truncateTable();
     }
 }

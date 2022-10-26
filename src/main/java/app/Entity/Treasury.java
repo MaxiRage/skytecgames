@@ -1,6 +1,6 @@
-package Entity;
+package app.Entity;
 
-import DB.ManagementTables;
+import app.DB.ManagementTables;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
@@ -26,7 +26,7 @@ public class Treasury extends Thread {
     }
 
     @SneakyThrows
-    public void updateBalanceTreasury(int amount) {
+    public synchronized void updateBalanceTreasury(int amount) {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("UPDATE treasury SET balances=balances+%d WHERE TREASURY_ID = 1", amount);
             ManagementTables.statement(connection, SQLRequest);

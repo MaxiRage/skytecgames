@@ -1,4 +1,4 @@
-package DB.Model;
+package app.DB.Model;
 
 public class UsersTable extends AbstarctTable {
     String nameTable = "users";

@@ -1,8 +1,8 @@
-package Actions;
+package app.Actions;
 
-import Entity.Details;
-import Entity.Treasury;
-import Entity.Users;
+import app.Entity.Details;
+import app.Entity.Treasury;
+import app.Entity.Users;
 import lombok.SneakyThrows;
 
 /***
@@ -11,7 +11,7 @@ import lombok.SneakyThrows;
 public class JoiningClan {
 
     int rateFee = 2;
-
+        // TODO Проверку, что юзер уже в клане
     @SneakyThrows
     public void feeTreasury(String nameUser) {
 
@@ -25,9 +25,9 @@ public class JoiningClan {
 
             new Details().insertTo(nameUser, String.valueOf(EnamActions.JOININGCLAN), amountForJoining);
 
-        } else System.out.println("Не хватает средств на членство");
+        } else System.out.println(Thread.currentThread() + " в работе: " +"Не хватает средств на членство");
 
-        System.out.printf("Поток " + Thread.currentThread() + " в работе: " +
+        System.out.printf(Thread.currentThread() + " в работе: " +
                         "Пользователь %s вступил в клан \"PowerRangers\" и заплатил %d в КАЗНУ \n"
                 , nameUser, amountForJoining);
     }

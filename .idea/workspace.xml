@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="add new Users Joining Clan">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Details.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9450cdc5-1164-4266-87cb-325220ce11af" name="Changes" comment="smal fix">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Actions/ActionPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Actions/EnamActions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/RunClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Treasury.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Treasury.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Actions/EnamActions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Actions/JoiningClan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Actions/JoiningClan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/ManagementTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DB/ManagementTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/AbstarctTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DB/Model/AbstarctTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/DetailsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DB/Model/DetailsTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/TreasuryTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DB/Model/TreasuryTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DB/Model/UsersTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DB/Model/UsersTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Details.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Entity/Details.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Treasury.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Entity/Treasury.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RunClass.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +39,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="JoiningClan" />
+        <entry key="$PROJECT_DIR$" value="workDetailsTable" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,6 +73,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Actions" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\lib" />
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\db" />
@@ -74,14 +83,17 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\iaros\IdeaProjects\skytecgames\src\main\resources\lib" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.RunClass">
-    <configuration name="DetailsTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DB.Model.DetailsTable" />
+  <component name="RunManager" selected="Application.app.RunClass">
+    <configuration name="ActionPipeline" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Actions.ActionPipeline" />
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="DB.*" />
+          <option name="PATTERN" value="app.Actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -89,12 +101,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JoiningClan" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Actions.JoiningClan" />
+    <configuration name="Entity.Users$test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Entity.Users$test" />
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Entity.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -103,18 +115,18 @@
       </method>
     </configuration>
     <configuration name="RunClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="RunClass" />
+      <option name="MAIN_CLASS_NAME" value="app.RunClass" />
       <module name="skytecgames" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Users$test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Entity.Users$test" />
+    <configuration name="app.Actions.JoiningClan" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Actions.JoiningClan" />
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Entity.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,12 +134,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Users" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Entity.Users" />
+    <configuration name="app.Entity.Users" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Entity.Users" />
       <module name="skytecgames" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Entity.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -137,8 +149,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunClass" />
-        <item itemvalue="Application.Actions.JoiningClan" />
+        <item itemvalue="Application.app.RunClass" />
+        <item itemvalue="Application.app.Actions.ActionPipeline" />
+        <item itemvalue="Application.app.Entity.Users" />
+        <item itemvalue="Application.app.Actions.JoiningClan" />
       </list>
     </recent_temporary>
   </component>
@@ -154,7 +168,7 @@
       <workItem from="1666552102196" duration="14287000" />
       <workItem from="1666600272713" duration="26668000" />
       <workItem from="1666692723020" duration="312000" />
-      <workItem from="1666718667158" duration="13456000" />
+      <workItem from="1666718667158" duration="27463000" />
     </task>
     <task id="LOCAL-00001" summary="Создание моделей БД + SQL запросов">
       <created>1666573623178</created>
@@ -177,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666726622470</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="smal fix">
+      <created>1666732352476</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666732352476</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +209,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="ActionPipline" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -198,6 +231,7 @@
     <MESSAGE value="Создание моделей БД + SQL запросов" />
     <MESSAGE value="fix models DB&#10;add Entity Users, Treasury&#10;add Threds" />
     <MESSAGE value="add new Users Joining Clan" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new Users Joining Clan" />
+    <MESSAGE value="smal fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="smal fix" />
   </component>
 </project>

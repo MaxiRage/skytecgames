@@ -1,11 +1,11 @@
-package DB.Model;
+package app.DB.Model;
 
 public abstract class AbstarctTable {
    public String nameTable;
 
     public String createTable() {
         System.out.println("CREATE TABLE " + nameTable);
-        return "CREATE TABLE " + nameTable + " (" +
+        return "SET AUTOCOMMIT ON; CREATE TABLE " + nameTable + " (" +
                 nameTable + "_ID INTEGER AUTO_INCREMENT PRIMARY KEY, ";
     }
 

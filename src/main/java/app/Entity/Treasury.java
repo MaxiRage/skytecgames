@@ -1,12 +1,12 @@
-package Entity;
+package app.Entity;
 
-import DB.ManagementTables;
+import app.DB.ManagementTables;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class Treasury extends Thread{
+public class Treasury extends Thread {
     private final String name_clans = "PowerRangers";
     private final int balances = 0;
 
@@ -19,12 +19,17 @@ public class Treasury extends Thread{
     private synchronized void createNewTreasury() throws SQLException {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("INSERT INTO TREASURY (NAME_CLANS, BALANCES) VALUES ('%s', %d)",
-            name_clans, balances);
+                    name_clans, balances);
             System.out.println("Поток " + Thread.currentThread() + " в работе: Создана КАЗНА, баланc = " + balances);
             ManagementTables.statement(connection, SQLRequest);
         }
     }
-    private synchronized void feeTreasury (int amount) {
 
+    @SneakyThrows
+    public synchronized void updateBalanceTreasury(int amount) {
+        try (Connection connection = ManagementTables.getConnection()) {
+            String SQLRequest = String.format("UPDATE treasury SET balances=balances+%d WHERE TREASURY_ID = 1", amount);
+            ManagementTables.statement(connection, SQLRequest);
+        }
     }
 }

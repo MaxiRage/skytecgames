@@ -1,8 +1,8 @@
-package DB;
+package app.DB;
 
-import DB.Model.DetailsTable;
-import DB.Model.TreasuryTable;
-import DB.Model.UsersTable;
+import app.DB.Model.DetailsTable;
+import app.DB.Model.TreasuryTable;
+import app.DB.Model.UsersTable;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,9 +1,9 @@
 package app;
 
-import app.Actions.ActionPipeline;
+import app.Service.Impl.ActionPipeline;
 import app.DB.ManagementTables;
-import app.Entity.Treasury;
-import app.Entity.Users;
+import app.Service.Impl.Treasury;
+import app.Service.Impl.Users;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,9 @@ public class RunClass {
     /***
      * ”кажите количество создаваемых пользователей
      */
-    public final static int countUsers = 10;
+
+    //TODO всЄ на английский
+    public final static int countUsers = 1;
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         //Connect and create databases

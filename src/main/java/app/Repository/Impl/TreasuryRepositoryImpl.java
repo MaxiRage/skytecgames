@@ -1,31 +1,25 @@
-package app.Entity;
+package app.Repository.Impl;
 
 import app.DB.ManagementTables;
+import app.Repository.TreasuryRepository;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
-public class Treasury extends Thread {
-    private final String name_clans = "PowerRangers";
-    private final int balances = 0;
+public class TreasuryRepositoryImpl implements TreasuryRepository {
 
-    @SneakyThrows
     @Override
-    public void run() {
-        createNewTreasury();
-    }
-
-    private synchronized void createNewTreasury() throws SQLException {
+    @SneakyThrows
+    public synchronized void createNewTreasury(String nameClan, int balances) {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("INSERT INTO TREASURY (NAME_CLANS, BALANCES) VALUES ('%s', %d)",
-                    name_clans, balances);
+                    nameClan, balances);
             System.out.println("Поток " + Thread.currentThread() + " в работе: Создана КАЗНА, баланc = " + balances);
             ManagementTables.statement(connection, SQLRequest);
         }
     }
-
     @SneakyThrows
+    @Override
     public synchronized void updateBalanceTreasury(int amount) {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("UPDATE treasury SET balances=balances+%d WHERE TREASURY_ID = 1", amount);

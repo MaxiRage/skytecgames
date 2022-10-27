@@ -23,15 +23,15 @@ public class RunClass {
 //        createTablesH2.truncateAllTable();
 
         //Создаём казну клана "PowerRangers"
-        new Treasury().start();
+//        new Treasury().start();
 
         //Создаём пользователей
-        int counter = countUsers;
-        while (counter-- > 0) {
-            new Users().start();
-        }
+//        int counter = countUsers;
+//        while (counter-- > 0) {
+//            new Users().start();
+//        }
         //Пользователи выполняют действия
         //TODO до того, как юзеры создаются они уже идут играть и нет денег на членство -> сделать ожидание потока денег
-        new ActionPipeline().start();
+//        new ActionPipeline().start();
     }
 }

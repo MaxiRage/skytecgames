@@ -1,13 +1,14 @@
 package app.Service.Impl;
 
 import app.Repository.UserRepository;
+import app.Service.Clan;
 import lombok.SneakyThrows;
 
 /**
  * Данный класс объединяет возможные действия пользователей
  * Первый делом пользователь вступает в клан, а дальше идёт на арену, либо на задания, либо в играет в азартные игры
  */
-public class ActionPipeline extends Thread{
+public class ActionPipeline extends Thread {
     @Override
     public void run() {
         runGameUser();
@@ -15,20 +16,23 @@ public class ActionPipeline extends Thread{
 
     //TODO Вернуть метод по подсчету строк в Юзерах = количетво
     UserRepository userRepository;
+    Clan clan;
 
-    int countUsers = userRepository.getCountRowsUsersTable();
+    int countUsers = userRepository.getCountRowsUsersTable(); // TODO Нет юзеров?
 
+
+    //TODO Переделать на сервис клана
     @SneakyThrows
     public void runGameUser() {
         int counter = countUsers;
         while (counter-- > 0) {
             int randomCountActions = (int) (Math.random() * 10) + 1;
-                String nameUser = userRepository.getUserName(countUsers--);
-                if (userRepository.checkIsPresentUserInBD(nameUser)) {
-                    System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " выбирает клан"); //TODO Сделать выбор клана
-                    new JoiningClan().feeTreasury(nameUser);
-                    System.out.println(actionsUsers(nameUser, randomCountActions));
-                } else runGameUser();
+            String nameUser = userRepository.getUserName(countUsers--);
+            if (userRepository.checkIsPresentUserInBD(nameUser)) {
+                System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " выбирает клан");
+                clan.JoiningClan(nameUser);
+                System.out.println(actionsUsers(nameUser, randomCountActions));
+            } else runGameUser();
         }
     }
 

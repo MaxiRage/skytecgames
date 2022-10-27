@@ -1,5 +1,6 @@
 package app.Service.Impl;
 
+import app.Repository.ClanRepository;
 import app.Service.Clan;
 import app.Utility.EnamActions;
 import app.Repository.DetailsRepository;
@@ -16,22 +17,26 @@ public class ClanImpl implements Clan {
     UserRepository userRepository;
     TreasuryRepository treasuryRepository;
     DetailsRepository detailsRepository;
+    ClanRepository clanRepository;
     int rateFee = 2;
+
 
     // TODO Проверку, что юзер уже в клане
     @SneakyThrows
-    public void JoiningClan(String nameUser) {
+    @Override
+    public void JoiningClan(String nameUser) { // TODO Перенести в действия?
         int randNumberJoiningClan = (int) ((Math.random() * 3) + 1);
         String nameClans1 = "PowerRangers";
         String nameClans2 = "MadWolves";
         String nameClans3 = "ForestElves";
 
         switch (randNumberJoiningClan) {
-            case 1 -> System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " вступил в клан" + nameClans1);
+            case 1 -> {
+                System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " вступил в клан" + nameClans1);
+            }
             case 2 ->
                     System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " играл в азартные игры");
-            default ->
-                    System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " был на задании");
+            default -> System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " был на задании");
         }
 
         int balanceUser = userRepository.getUserBalance(nameUser);

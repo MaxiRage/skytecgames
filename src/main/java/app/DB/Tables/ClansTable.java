@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class ClansTable extends AbstarctTable{
     String nameTable = "clans";
@@ -6,10 +6,8 @@ public class ClansTable extends AbstarctTable{
     public String createTable() {
         super.nameTable = this.nameTable;
         final String nameClan = "name_clan";
-        final String balance = "balance";
         return super.createTable() +
-                nameClan + " VARCHAR(50) NOT NULL, " +
-                balance + " DECIMAL (10, 2) NOT NULL)";
+                nameClan + " VARCHAR(50) NOT NULL)";
     }
 
     @Override

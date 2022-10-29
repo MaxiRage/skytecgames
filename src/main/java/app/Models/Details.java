@@ -1,4 +1,4 @@
-package app.Service.Impl;
+package app.Models;
 
 /***
  * Статику на 100 - цикл - оплата

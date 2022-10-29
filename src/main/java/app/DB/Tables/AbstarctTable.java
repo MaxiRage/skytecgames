@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public abstract class AbstarctTable {
    public String nameTable;

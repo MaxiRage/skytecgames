@@ -1,28 +1,24 @@
 package app.Service.Impl;
 
 import app.Repository.UserRepository;
-import app.Service.Clan;
-import lombok.SneakyThrows;
+import app.Service.ActionsService;
+import app.Service.ClanService;
 
 /**
  * Данный класс объединяет возможные действия пользователей
  * Первый делом пользователь вступает в клан, а дальше идёт на арену, либо на задания, либо в играет в азартные игры
  */
-public class ActionPipeline extends Thread {
-    @Override
-    public void run() {
-        runGameUser();
-    }
+public class ActionsServiceImpl implements ActionsService {
 
     //TODO Вернуть метод по подсчету строк в Юзерах = количетво
-    UserRepository userRepository;
-    Clan clan;
 
-    int countUsers = userRepository.getCountRowsUsersTable(); // TODO Нет юзеров?
+    private UserRepository userRepository;
+    private ClanService clanService;
+    int countUsers = userRepository.getCountRowsUsersTable(); // TODO Нет юзеров, т.к. NPE ?
 
 
     //TODO Переделать на сервис клана
-    @SneakyThrows
+    @Override
     public void runGameUser() {
         int counter = countUsers;
         while (counter-- > 0) {
@@ -30,7 +26,7 @@ public class ActionPipeline extends Thread {
             String nameUser = userRepository.getUserName(countUsers--);
             if (userRepository.checkIsPresentUserInBD(nameUser)) {
                 System.out.println(Thread.currentThread() + " в работе: Игрок " + nameUser + " выбирает клан");
-                clan.JoiningClan(nameUser);
+                clanService.JoiningClan(nameUser);
                 System.out.println(actionsUsers(nameUser, randomCountActions));
             } else runGameUser();
         }
@@ -39,7 +35,8 @@ public class ActionPipeline extends Thread {
     /**
      * Метод выполняет рандомное действие
      */
-    private static String actionsUsers(String nameUser, int countActions) {
+    @Override
+    public String actionsUsers(String nameUser, int countActions) {
         if (countActions <= 0)
             return Thread.currentThread() + " в работе: Пользователь " + nameUser + " завершил игру без действий";
         else {

@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class UsersTable extends AbstarctTable {
     String nameTable = "users";
@@ -14,7 +14,7 @@ public class UsersTable extends AbstarctTable {
 
         return super.createTable() +
                 nameUsers + " VARCHAR(50) NOT NULL UNIQUE, " +
-                idClans + " INTEGER NOT NULL, " +
+                idClans + " INTEGER, " +
                 skillArena + " INTEGER NOT NULL, " +
                 skillGamble + " INTEGER NOT NULL, " +
                 balance + " DECIMAL(10,2) NOT NULL, " +

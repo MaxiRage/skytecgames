@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class TreasuryTable extends AbstarctTable {
     String nameTable = "treasury";

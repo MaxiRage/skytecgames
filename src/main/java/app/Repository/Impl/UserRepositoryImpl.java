@@ -6,24 +6,24 @@ import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    @SneakyThrows
     @Override
-    public synchronized void createNewUser(String nameUser, int count, String nameClan, int skillArena, int skillGamble, int balances) {
-        String fullNameUser = nameUser + count;
+    public synchronized void createNewUser(String nameUser, int skillArena, int skillGamble, int balances) {
         try (Connection connection = ManagementTables.getConnection()) {
-            String SQLRequestCreate = String.format("INSERT INTO USERS (NAME_USERS, NAME_CLANS, SKILL_ARENA, SKILL_GAMBLE, BALANCES) " +
-                    "VALUES ('%s', '%s', %d, %d, %d)", fullNameUser, nameClan, skillArena, skillGamble, balances);
+            String SQLRequestCreate = String.format("INSERT INTO USERS (NAME_USERS, SKILL_ARENA, SKILL_GAMBLE, BALANCES) " +
+                    "VALUES ('%s', %d, %d, %d)", nameUser, skillArena, skillGamble, balances);
             ManagementTables.statement(connection, SQLRequestCreate);
 
-            System.out.println(Thread.currentThread() + " в работе: Cоздан user c name = " + fullNameUser);
+            System.out.println(Thread.currentThread() + " в работе: Cоздал user c name = " + nameUser);
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Ошибка создания нового пользователя " + nameUser);
         }
     }
 
-    @SneakyThrows
     @Override
     public synchronized String getUserName(int idUser) {
         String nameUser = "";
@@ -38,11 +38,12 @@ public class UserRepositoryImpl implements UserRepository {
                 nameUser = resultSet.getString("name_users");
             }
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Не найдено имя пользователя с id " + idUser);
         }
         return nameUser;
     }
 
-    @SneakyThrows
     @Override
     public synchronized int getUserId(String nameUser) {
         int user_id = 0;
@@ -58,11 +59,12 @@ public class UserRepositoryImpl implements UserRepository {
             }
 
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Не найден id пользователя " + nameUser);
         }
         return user_id;
     }
 
-    @SneakyThrows
     @Override
     public synchronized int getUserBalance(String nameUser) {
         int balanceUser = 0;
@@ -79,11 +81,12 @@ public class UserRepositoryImpl implements UserRepository {
             }
 
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Баланс не получен у пользователя " + nameUser);
         }
         return balanceUser;
     }
 
-    @SneakyThrows
     @Override
     public synchronized int getSkillArena(String nameUser) {
         int skillArena = 0;
@@ -100,20 +103,27 @@ public class UserRepositoryImpl implements UserRepository {
             }
 
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Не получен SkillArena у пользователя " + nameUser);
         }
         return skillArena;
     }
 
-    @SneakyThrows
     @Override
-    public synchronized void updateBalanceUsers(int amount, String nameUser) {
+    public synchronized void reduceBalanceUsers(int amount, String nameUser) {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("UPDATE users SET balances=balances-%d WHERE name_users = '%s'", amount, nameUser);
             ManagementTables.statement(connection, SQLRequest);
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Ошибка уменьшения баланса Пользователя " + nameUser);
         }
     }
 
-    @SneakyThrows
+    @Override
+    public synchronized void increaseBalanceUsers(int amount, String nameUser) {
+
+    }
+
     @Override
     public synchronized int getCountRowsUsersTable() {
         int count = 0;
@@ -126,11 +136,12 @@ public class UserRepositoryImpl implements UserRepository {
                 count = resultSet.getInt("count(*)");
             }
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: Ошибка получения количества записей в таблице Пользователей");
         }
         return count;
     }
 
-    @SneakyThrows
     @Override
     public synchronized boolean checkIsPresentUserInBD(String nameUsers) {
         try (Connection connection = ManagementTables.getConnection()) {
@@ -143,6 +154,8 @@ public class UserRepositoryImpl implements UserRepository {
                 return true;
             }
             resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " " + Thread.currentThread() + " в работе: В БДU не найден User " + nameUsers);
         }
         return false;
     }

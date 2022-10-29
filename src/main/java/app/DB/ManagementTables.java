@@ -1,6 +1,6 @@
 package app.DB;
 
-import app.DB.Model.*;
+import app.DB.Tables.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

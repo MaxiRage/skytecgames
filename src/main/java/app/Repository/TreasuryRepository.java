@@ -1,12 +1,9 @@
 package app.Repository;
 
-import lombok.SneakyThrows;
-
-import java.sql.SQLException;
-
 public interface TreasuryRepository {
 
-    void createNewTreasury(String nameClan, int balances);
+    void createNewTreasury(int idClan, int balances);
 
-    void updateBalanceTreasury(int amount);
+    void increaseBalanceTreasury(int idClan, int amount);
+    void reduceBalanceTreasury(int idClan, int amount);
 }

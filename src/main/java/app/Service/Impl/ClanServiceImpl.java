@@ -35,15 +35,15 @@ public class ClanServiceImpl implements ClanService {
 
             userRepository.reduceBalanceUsers(amountForJoining, nameUser);
             detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.JOINING_CLAN), amountForJoining, idTreasury);
-            treasuryRepository.increaseBalanceTreasury(idTreasury, amountForJoining);
+//            treasuryRepository.increaseBalanceTreasury(idTreasury, amountForJoining);
             userRepository.userJoinsClan(nameUser, idClan);
 
-            System.out.printf(Thread.currentThread() + " in work: " +
+            System.out.printf(Thread.currentThread() + " is working: " +
                             "User %s joined the clan " + clanRepository.getClanName(idClan) + " and pay %d â treasury \n"
                     , nameUser, amountForJoining);
             return true;
         } else
-            System.out.println(Thread.currentThread() + " in work: " + nameUser + " not enough funds for membership");
+            System.out.println(Thread.currentThread() + " is working: " + nameUser + " not enough funds for membership");
         return false;
     }
 }

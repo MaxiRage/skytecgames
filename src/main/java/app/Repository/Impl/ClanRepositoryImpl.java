@@ -18,9 +18,9 @@ public class ClanRepositoryImpl implements ClanRepository {
             String SQLRequest = String.format("INSERT INTO clans (name_clan) " +
                     "VALUES ('%s')", nameClan);
             ManagementTables.statement(connection, SQLRequest);
-            System.out.println(Thread.currentThread() + " in work: Cоздал клан " + nameClan);
+            System.out.println(Thread.currentThread() + " is working: Cоздал клан " + nameClan);
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " in work: Не удалось создать новый Клан");
+            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Не удалось создать новый Клан");
         }
     }
 
@@ -38,7 +38,7 @@ public class ClanRepositoryImpl implements ClanRepository {
             }
             resultSet.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " in work: Ошибка получения записей в таблице Кланов");
+            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Ошибка получения записей в таблице Кланов");
         }
         return listClans;
     }
@@ -59,7 +59,7 @@ public class ClanRepositoryImpl implements ClanRepository {
 
             resultSet.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " in work: Не найден id клана " + nameClan);
+            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Не найден id клана " + nameClan);
         }
         return clan_id;
     }

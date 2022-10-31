@@ -15,7 +15,7 @@ public class TreasuryRepositoryImpl implements TreasuryRepository {
         try (Connection connection = ManagementTables.getConnection()) {
             String SQLRequest = String.format("INSERT INTO TREASURY (clans_id, balances) VALUES ('%s', %d)",
                     idClan, 0);
-            System.out.println("Поток " + Thread.currentThread() + " in work: create treasury for clan " + nameClan);
+            System.out.println("Поток " + Thread.currentThread() + " is working: create treasury for clan " + nameClan);
             ManagementTables.statement(connection, SQLRequest);
         } catch (SQLException e) {
             throw new RuntimeException(e);

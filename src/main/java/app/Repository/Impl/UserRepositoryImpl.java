@@ -19,7 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
                     "VALUES ('%s', %d, %d, %d)", nameUser, skillArena, skillGamble, balances);
             ManagementTables.statement(connection, SQLRequestCreate);
 
-            System.out.println(Thread.currentThread() + " in work: create user with name " + nameUser);
+            System.out.println(Thread.currentThread() + " is working: create user with name " + nameUser);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

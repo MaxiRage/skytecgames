@@ -17,10 +17,13 @@ public class DetailsRepositoryImpl implements app.Repository.DetailsRepository {
     public synchronized void insertTo(String nameUser, String actions, int amount, int idTreasury) {
         try (Connection connection = ManagementTables.getConnection()) {
             int balanceBefore = treasuryRepository.getBalance(idTreasury);
-            int balanceAfter = balanceBefore;
-            if (Objects.equals(actions,"JOINING_CLAN") || Objects.equals(actions, "BATTLES_DEDUCT") || Objects.equals(actions, "GAMBLES_DEDUCT")
+            if (Objects.equals(actions, "JOINING_CLAN") || Objects.equals(actions, "BATTLES_DEDUCT") || Objects.equals(actions, "GAMBLES_DEDUCT")
                     || Objects.equals(actions, "TASKS_DEDUCT") || Objects.equals(actions, "HUNTING_DEDUCT"))
-                balanceAfter +=amount;
+
+                treasuryRepository.increaseBalanceTreasury(idTreasury, amount);
+
+            int balanceAfter = treasuryRepository.getBalance(idTreasury);
+
             String SQLRequest = String.format("INSERT INTO details (time_transaction, users_id, action, amount, treasury_id, balances_before, balances_after) " +
                     "VALUES ('%s', %d, '%s', %d, %d, %d, %d)", LocalDateTime.now(), userRepository.getUserId(nameUser), actions, amount, idTreasury, balanceBefore, balanceAfter);
             ManagementTables.statement(connection, SQLRequest);

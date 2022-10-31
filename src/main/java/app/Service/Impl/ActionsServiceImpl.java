@@ -45,12 +45,12 @@ public class ActionsServiceImpl implements ActionsService {
             nameOpponent = userRepository.getUserName(randomIdUser);
         } while (idUser == randomIdUser);
 
-//        if (!userRepository.checkUsersMemberClans(nameUser)) {
-//            clanService.JoiningClan(nameUser);
-//        }
-//        if (!userRepository.checkUsersMemberClans(nameOpponent)) {
-//            clanService.JoiningClan(nameOpponent);
-//        }
+        if (!userRepository.checkUsersMemberClans(nameUser)) {
+            clanService.JoiningClan(nameUser);
+        }
+        if (!userRepository.checkUsersMemberClans(nameOpponent)) {
+            clanService.JoiningClan(nameOpponent);
+        }
 
         int randNumber = (int) ((Math.random() * 4) + 1);
         switch (randNumber) {
@@ -72,6 +72,7 @@ public class ActionsServiceImpl implements ActionsService {
 
         int balanceOpponent = userRepository.getUserBalance(nameOpponent);
         int idClanOpponent = userRepository.getUserClan(nameOpponent);
+        int idTreasuryOpponent = treasuryRepository.getIdTreasury(idClanOpponent);
 
         if (balanceUser > payment && balanceOpponent > payment) {
 
@@ -79,32 +80,33 @@ public class ActionsServiceImpl implements ActionsService {
             int skillUser = userRepository.getSkillArena(nameUser);
 
             int idClan = userRepository.getUserClan(nameUser);
+            int idTreasury = treasuryRepository.getIdTreasury(idClan);
 
             userRepository.reduceBalanceUsers(payment, nameUser);
-            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_PAYMENT), payment, idClan);
+            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_PAYMENT), payment, idTreasury);
 
             userRepository.reduceBalanceUsers(payment, nameOpponent);
-            detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_PAYMENT), payment, idClanOpponent);
+            detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_PAYMENT), payment, idTreasuryOpponent);
 
             if (skillUser > skillOpponent) {
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_WIN), winPaycheck - deductTreasury, idTreasury);
                 userRepository.increaseBalanceUsers(winPaycheck - deductTreasury, nameUser);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_WIN), winPaycheck - deductTreasury, idClan);
-                treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_DEDUCT), deductTreasury, idClan);
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.BATTLES_DEDUCT), deductTreasury, idTreasury);
+                treasuryRepository.increaseBalanceTreasury(idTreasury, deductTreasury);
                 System.out.println(Thread.currentThread() + " in work: " + nameUser + " won in the arena " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             } else if (skillUser == skillOpponent) {
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idTreasury);
                 userRepository.increaseBalanceUsers(payment, nameUser);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idClan);
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idTreasuryOpponent);
                 userRepository.increaseBalanceUsers(payment, nameOpponent);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idClanOpponent);
                 System.out.println(Thread.currentThread() + " in work: " + "Draw in the arena " + nameUser + " " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             } else {
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_WIN), winPaycheck - deductTreasury, idTreasuryOpponent);
                 userRepository.increaseBalanceUsers(winPaycheck - deductTreasury, nameOpponent);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_WIN), winPaycheck - deductTreasury, idClanOpponent);
-                treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_DEDUCT), deductTreasury, idClanOpponent);
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.BATTLES_DEDUCT), deductTreasury, idTreasuryOpponent);
+                treasuryRepository.increaseBalanceTreasury(idTreasuryOpponent, deductTreasury);
                 System.out.println(Thread.currentThread() + " in work: " + nameUser + " loser in the arena " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             }
@@ -123,6 +125,7 @@ public class ActionsServiceImpl implements ActionsService {
 
         int balanceOpponent = userRepository.getUserBalance(nameOpponent);
         int idClanOpponent = userRepository.getUserClan(nameOpponent);
+        int idTreasuryOpponent = treasuryRepository.getIdTreasury(idClanOpponent);
 
         if (balanceUser > payment && balanceOpponent > payment) {
 
@@ -130,32 +133,33 @@ public class ActionsServiceImpl implements ActionsService {
             int skillUser = userRepository.getSkillGamble(nameUser);
 
             int idClan = userRepository.getUserClan(nameUser);
+            int idTreasury = treasuryRepository.getIdTreasury(idClan);
 
+            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_PAYMENT), payment, idTreasury);
             userRepository.reduceBalanceUsers(payment, nameUser);
-            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_PAYMENT), payment, idClan);
 
+            detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_PAYMENT), payment, idTreasuryOpponent);
             userRepository.reduceBalanceUsers(payment, nameOpponent);
-            detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_PAYMENT), payment, idClanOpponent);
 
             if (skillUser > skillOpponent) {
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_WIN), winPaycheck - deductTreasury, idTreasury);
                 userRepository.increaseBalanceUsers(winPaycheck - deductTreasury, nameUser);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_WIN), winPaycheck - deductTreasury, idClan);
-                treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_DEDUCT), deductTreasury, idClan);
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.GAMBLES_DEDUCT), deductTreasury, idTreasury);
+                treasuryRepository.increaseBalanceTreasury(idTreasury, deductTreasury);
                 System.out.println(Thread.currentThread() + " in work: " + nameUser + " won by playing cards " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             } else if (skillUser == skillOpponent) {
+                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idTreasury);
                 userRepository.increaseBalanceUsers(payment, nameUser);
-                detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idClan);
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idTreasuryOpponent);
                 userRepository.increaseBalanceUsers(payment, nameOpponent);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.RETURN_PAYMENT), payment, idClanOpponent);
                 System.out.println(Thread.currentThread() + " in work: Draw in the card game " + nameUser + " " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             } else {
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_WIN), winPaycheck - deductTreasury, idTreasuryOpponent);
                 userRepository.increaseBalanceUsers(winPaycheck - deductTreasury, nameOpponent);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_WIN), winPaycheck - deductTreasury, idClanOpponent);
-                treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_DEDUCT), deductTreasury, idClanOpponent);
+                detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_DEDUCT), deductTreasury, idTreasuryOpponent);
+                treasuryRepository.increaseBalanceTreasury(idTreasuryOpponent, deductTreasury);
                 System.out.println(Thread.currentThread() + " in work: " + "Игрок " + nameUser + " loser playing cards " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             }
@@ -170,10 +174,12 @@ public class ActionsServiceImpl implements ActionsService {
         int deductTreasury = (int) (awardForTask * deduct);
 
         int idClan = userRepository.getUserClan(nameUser);
+        int idTreasury = treasuryRepository.getIdTreasury(idClan);
+
+        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.TASKS), awardForTask - deductTreasury, idTreasury);
         userRepository.increaseBalanceUsers(awardForTask - deductTreasury, nameUser);
-        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.TASKS), awardForTask - deductTreasury, idClan);
-        treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.TASKS_DEDUCT), deductTreasury, idClan);
+        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.TASKS_DEDUCT), deductTreasury, idTreasury);
+        treasuryRepository.increaseBalanceTreasury(idTreasury, deductTreasury);
         System.out.println(Thread.currentThread() + " in work: " + nameUser + " completed the task and received a reward = " + awardForTask);
     }
 
@@ -184,10 +190,12 @@ public class ActionsServiceImpl implements ActionsService {
         int deductTreasury = (int) (awardForTask * deduct);
 
         int idClan = userRepository.getUserClan(nameUser);
+        int idTreasury = treasuryRepository.getIdTreasury(idClan);
+
+        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.HUNTING), awardForTask - deductTreasury, idTreasury);
         userRepository.increaseBalanceUsers(awardForTask - deductTreasury, nameUser);
-        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.HUNTING), awardForTask - deductTreasury, idClan);
-        treasuryRepository.increaseBalanceTreasury(idClan, deductTreasury);
-        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.HUNTING_DEDUCT), deductTreasury, idClan);
-        System.out.println(Thread.currentThread() + " in work: " + nameUser + " went hunting and got a drop = " + awardForTask);
+        detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.HUNTING_DEDUCT), deductTreasury, idTreasury);
+        treasuryRepository.increaseBalanceTreasury(idTreasury, deductTreasury);
+        System.out.println(Thread.currentThread() + " in work: " + nameUser + " went hunting and got a loot = " + awardForTask);
     }
 }

@@ -45,12 +45,12 @@ public class ActionsServiceImpl implements ActionsService {
             nameOpponent = userRepository.getUserName(randomIdUser);
         } while (idUser == randomIdUser);
 
-//        if (!userRepository.checkUsersMemberClans(nameUser)) {
-//            clanService.JoiningClan(nameUser);
-//        }
-//        if (!userRepository.checkUsersMemberClans(nameOpponent)) {
-//            clanService.JoiningClan(nameOpponent);
-//        }
+        if (!userRepository.checkUsersMemberClans(nameUser)) {
+            clanService.JoiningClan(nameUser);
+        }
+        if (!userRepository.checkUsersMemberClans(nameOpponent)) {
+            clanService.JoiningClan(nameOpponent);
+        }
 
         int randNumber = (int) ((Math.random() * 4) + 1);
         switch (randNumber) {

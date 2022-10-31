@@ -20,7 +20,7 @@ public class ClanRepositoryImpl implements ClanRepository {
             ManagementTables.statement(connection, SQLRequest);
             System.out.println(Thread.currentThread() + " is working: Cоздал клан " + nameClan);
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Не удалось создать новый Клан");
+            throw new RuntimeException(e);
         }
     }
 
@@ -38,7 +38,7 @@ public class ClanRepositoryImpl implements ClanRepository {
             }
             resultSet.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Ошибка получения записей в таблице Кланов");
+            throw new RuntimeException(e);
         }
         return listClans;
     }
@@ -59,7 +59,7 @@ public class ClanRepositoryImpl implements ClanRepository {
 
             resultSet.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e + " " + Thread.currentThread() + " is working: Не найден id клана " + nameClan);
+            throw new RuntimeException(e);
         }
         return clan_id;
     }

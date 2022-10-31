@@ -29,7 +29,6 @@ public class GameApplication {
     public static void run(int countUsers) {
         //Connect and create database's
         ManagementTables managementTables = new ManagementTables();
-        managementTables.dropAllTable();
         managementTables.createAllTables();
 
         ClanRepository clanRepository = new ClanRepositoryImpl();

@@ -13,7 +13,7 @@ public class ManagementTables {
     AbstarctTable detailsTable = new DetailsTable();
     AbstarctTable clansTable = new ClansTable();
 
-    public void createAllTables(String... tables) throws SQLException {
+    public void createAllTables() {
         try (Connection connection = getConnection()) {
 
             String SQLRequest =
@@ -22,10 +22,13 @@ public class ManagementTables {
                             treasuryTable.createTable() + "; " +
                             detailsTable.createTable();
             statement(connection, SQLRequest);
+        } catch (SQLException e) {
+            dropAllTable();
+            createAllTables();
         }
     }
 
-    public void dropAllTable() throws SQLException {
+    public void dropAllTable() {
         try (Connection connection = getConnection()) {
 
             String SQLRequest =
@@ -33,13 +36,14 @@ public class ManagementTables {
                             treasuryTable.dropTable() + "; " +
                             usersTable.dropTable() + "; " +
                             clansTable.dropTable();
-            ;
             statement(connection, SQLRequest);
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void truncateAllTable() throws SQLException {
+    public void truncateAllTable()  {
         try (Connection connection = getConnection()) {
 
             String SQLRequest =
@@ -50,6 +54,8 @@ public class ManagementTables {
 
             statement(connection, SQLRequest);
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -3,10 +3,10 @@ package app;
 import app.Utility.GameApplication;
 
 /***
- * Укажите количество создаваемых пользователей в переменной "countUsers"
+ * Specify the number of users to create in the variable "countUsers"
  */
 public class SkytecGamesApplication {
-    static int countUsers = 100;
+    static int countUsers = 2;
 
     public static void main(String[] args) {
         GameApplication.run(countUsers);

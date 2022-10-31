@@ -18,6 +18,7 @@ import lombok.SneakyThrows;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /***
  * This class creates and connects to database's. Next, user's, clan's, and treasuries are created and user actions are triggered
@@ -43,8 +44,7 @@ public class GameApplication {
         ExecutorService executors = Executors.newCachedThreadPool();
 
         //Create clans and treasury's
-        final String[] nameClans = {"PowerRangers", "MadWolves", "ForestElves"};
-        Arrays.stream(nameClans)
+        Arrays.stream(new String[]{"PowerRangers", "MadWolves", "ForestElves"})
                 .parallel()
                 .forEach(nameClan -> {
                     clanRepository.createClan(nameClan);
@@ -56,24 +56,18 @@ public class GameApplication {
         while (countUsers-- > 0)
             executors.submit(userService::createNewUser);
 
-        //Users join a clan
-        Thread.sleep(1000); //to work correctly with all users
+        //Users join a clan and perform action's
+        Thread.sleep(100); //to work correctly with all users
         userRepository.getAllUsers()
-                .stream()
-                .parallel()
-                .forEach(clanService::JoiningClan);
-
-        //Users perform action's
-        Thread.sleep(1000); //to work correctly with all users
-        userRepository.getAllUsers()
-                .stream()
-                .parallel()
-                .forEach(nameUser -> {
-                            int randomCountActions = (int) (Math.random() * 10) + 1;
-                            while (randomCountActions-- > 0)
-                                actionsService.runGames(nameUser);
-                        }
-                );
+                .forEach(nameUser ->
+                        executors.submit(() -> {
+                                    clanService.JoiningClan(nameUser);
+                                    AtomicInteger randomCountActions = new AtomicInteger((int) (Math.random() * 10) + 1);
+                                    while (randomCountActions.getAndDecrement() > 0) {
+                                                actionsService.runGames(nameUser);
+                                    }
+                                }
+                        ));
         executors.shutdown();
     }
 }

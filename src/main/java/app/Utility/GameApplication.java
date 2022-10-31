@@ -59,6 +59,8 @@ public class GameApplication {
         //Users join a clan and perform action's
         Thread.sleep(100); //to work correctly with all users
         userRepository.getAllUsers()
+                .stream()
+                .parallel()
                 .forEach(nameUser ->
                         executors.submit(() -> {
                                     clanService.JoiningClan(nameUser);

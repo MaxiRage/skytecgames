@@ -1,24 +1,25 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class DetailsTable extends AbstarctTable {
 
     String nameTable = "details";
+
     @Override
     public String createTable() {
         super.nameTable = this.nameTable;
-        final String timeTransaction = "timeTransaction";
-        final String users_id = "users_id";
+        final String timeTransaction = "time_Transaction";
+        final String usersId = "users_id";
         final String action = "action";
         final String amount = "amount";
-        final String treasury_id = "treasury_id";
+        final String treasuryId = "treasury_id";
         return super.createTable() +
                 timeTransaction + " TIMESTAMP NOT NULL, " +
-                users_id + " INTEGER NOT NULL, " +
+                usersId + " INTEGER NOT NULL, " +
                 action + " VARCHAR(50) NOT NULL, " +
                 amount + " DECIMAL (10, 2) NOT NULL, " +
-                treasury_id + " INTEGER NOT NULL, " +
-                "FOREIGN KEY (" + users_id + ") REFERENCES Users (" + users_id + ")," +
-                "FOREIGN KEY (" + treasury_id + ") REFERENCES Treasury (" + treasury_id + "))";
+                treasuryId + " INTEGER NOT NULL, " +
+                "FOREIGN KEY (" + usersId + ") REFERENCES Users (" + usersId + ")," +
+                "FOREIGN KEY (" + treasuryId + ") REFERENCES Treasury (" + treasuryId + "))";
     }
 
     @Override

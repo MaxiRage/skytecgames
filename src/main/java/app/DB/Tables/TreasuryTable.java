@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class TreasuryTable extends AbstarctTable {
     String nameTable = "treasury";
@@ -7,10 +7,11 @@ public class TreasuryTable extends AbstarctTable {
     public String createTable() {
         super.nameTable = this.nameTable;
         final String balance = "balances";
-        final String nameClan = "name_Clans";
+        final String idClans = "clans_id";
         return super.createTable() +
-                nameClan + " VARCHAR(50) NOT NULL, " +
-                balance + " DECIMAL(10,2) NOT NULL)";
+                idClans + " INTEGER NOT NULL, " +
+                balance + " DECIMAL(10,2) NOT NULL," +
+                "FOREIGN KEY (" + idClans + ") REFERENCES Clans (" + idClans + "))";
     }
 
     @Override

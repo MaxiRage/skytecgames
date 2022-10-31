@@ -1,4 +1,4 @@
-package app.DB.Model;
+package app.DB.Tables;
 
 public class UsersTable extends AbstarctTable {
     String nameTable = "users";
@@ -7,17 +7,18 @@ public class UsersTable extends AbstarctTable {
     public String createTable() {
         super.nameTable = this.nameTable;
         final String nameUsers = "name_Users";
-        final String nameClan = "name_Clans";
+        final String idClans = "clans_id";
         final String skillArena = "skill_Arena";
         final String skillGamble = "skill_Gamble";
         final String balance = "balances";
 
         return super.createTable() +
                 nameUsers + " VARCHAR(50) NOT NULL UNIQUE, " +
-                nameClan + " VARCHAR(50) NOT NULL, " +
+                idClans + " INTEGER, " +
                 skillArena + " INTEGER NOT NULL, " +
                 skillGamble + " INTEGER NOT NULL, " +
-                balance + " DECIMAL(10,2) NOT NULL)";
+                balance + " DECIMAL(10,2) NOT NULL, " +
+                "FOREIGN KEY (" + idClans + ") REFERENCES Clans (" + idClans + "))";
     }
 
     @Override

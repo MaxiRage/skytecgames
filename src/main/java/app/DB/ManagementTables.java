@@ -1,8 +1,6 @@
 package app.DB;
 
-import app.DB.Model.DetailsTable;
-import app.DB.Model.TreasuryTable;
-import app.DB.Model.UsersTable;
+import app.DB.Tables.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,15 +8,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ManagementTables {
-    TreasuryTable treasuryTable = new TreasuryTable();
-    UsersTable usersTable = new UsersTable();
-    DetailsTable detailsTable = new DetailsTable();
+    AbstarctTable treasuryTable = new TreasuryTable();
+    AbstarctTable usersTable = new UsersTable();
+    AbstarctTable detailsTable = new DetailsTable();
+    AbstarctTable clansTable = new ClansTable();
 
     public void createAllTables(String... tables) throws SQLException {
         try (Connection connection = getConnection()) {
 
             String SQLRequest =
-                    usersTable.createTable() + "; " +
+                    clansTable.createTable() + "; " +
+                            usersTable.createTable() + "; " +
                             treasuryTable.createTable() + "; " +
                             detailsTable.createTable();
             statement(connection, SQLRequest);
@@ -30,8 +30,10 @@ public class ManagementTables {
 
             String SQLRequest =
                     detailsTable.dropTable() + "; " +
+                            treasuryTable.dropTable() + "; " +
                             usersTable.dropTable() + "; " +
-                            treasuryTable.dropTable();
+                            clansTable.dropTable();
+            ;
             statement(connection, SQLRequest);
 
         }
@@ -43,6 +45,7 @@ public class ManagementTables {
             String SQLRequest =
                     detailsTable.truncateTable() + "; " +
                             usersTable.truncateTable() + "; " +
+                            clansTable.truncateTable() + "; " +
                             treasuryTable.truncateTable();
 
             statement(connection, SQLRequest);

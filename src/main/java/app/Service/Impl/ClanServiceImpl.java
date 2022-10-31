@@ -26,6 +26,7 @@ public class ClanServiceImpl implements ClanService {
 
         int rateFee = 2;
         int idClan = (int) ((Math.random() * 3) + 1);
+        int idTreasury = treasuryRepository.getIdTreasury(idClan);
 
         int balanceUser = userRepository.getUserBalance(nameUser);
         int amountForJoining = userRepository.getSkillArena(nameUser) * rateFee;
@@ -33,8 +34,8 @@ public class ClanServiceImpl implements ClanService {
         if (balanceUser > amountForJoining) {
 
             userRepository.reduceBalanceUsers(amountForJoining, nameUser);
-            treasuryRepository.increaseBalanceTreasury(idClan, amountForJoining);
-            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.JOINING_CLAN), amountForJoining, idClan);
+            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.JOINING_CLAN), amountForJoining, idTreasury);
+            treasuryRepository.increaseBalanceTreasury(idTreasury, amountForJoining);
             userRepository.userJoinsClan(nameUser, idClan);
 
             System.out.printf(Thread.currentThread() + " in work: " +

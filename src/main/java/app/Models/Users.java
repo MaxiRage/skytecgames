@@ -1,18 +1,17 @@
 package app.Models;
 
-import app.Repository.Impl.UserRepositoryImpl;
-import app.Repository.UserRepository;
-import lombok.Getter;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Users {
-    private String nameUsers = "Player_";
-    private int skillArena = (int) (Math.random() * 10) + 1;
-    private int skillGamble = (int) (Math.random() * 30) + 1;
-    private int balances = 300;
-    private static int count = 0;
+    private final String nameUsers = "Player_";
+    private final int skillArena = (int) (Math.random() * 10) + 1;
+    private final int skillGamble = (int) (Math.random() * 30) + 1;
+    private final int balances = 300;
+    //    private static int count = 0;
+    public static AtomicInteger count = new AtomicInteger(0);
 
     public synchronized String getNameUsers() {
-        return nameUsers + ++count;
+        return nameUsers + count.incrementAndGet();
     }
 
     public synchronized int getSkillArena() {
@@ -25,9 +24,5 @@ public class Users {
 
     public synchronized int getBalances() {
         return balances;
-    }
-
-    public synchronized static int getCount() {
-        return count;
     }
 }

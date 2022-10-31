@@ -1,13 +1,14 @@
 package app.DB.Tables;
 
-public class ClansTable extends AbstarctTable{
+public class ClansTable extends AbstarctTable {
     String nameTable = "clans";
+
     @Override
     public String createTable() {
         super.nameTable = this.nameTable;
         final String nameClan = "name_clan";
         return super.createTable() +
-                nameClan + " VARCHAR(50) NOT NULL)";
+                nameClan + " VARCHAR(50) NOT NULL UNIQUE)";
     }
 
     @Override

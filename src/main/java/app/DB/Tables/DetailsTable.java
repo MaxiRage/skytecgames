@@ -3,10 +3,11 @@ package app.DB.Tables;
 public class DetailsTable extends AbstarctTable {
 
     String nameTable = "details";
+
     @Override
     public String createTable() {
         super.nameTable = this.nameTable;
-        final String timeTransaction = "timeTransaction";
+        final String timeTransaction = "time_Transaction";
         final String usersId = "users_id";
         final String action = "action";
         final String amount = "amount";

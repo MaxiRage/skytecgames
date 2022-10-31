@@ -1,6 +1,13 @@
 package app.Service;
 
 public interface ActionsService {
-    String actionsUsers(String nameUser, int countActions);
-    void runGameUser();
+    void runGames(String nameUser);
+
+    void battle(String nameUser, String nameOpponent);
+
+    void gamble(String nameUser, String nameOpponent);
+
+    void tasks(String nameUser);
+
+    void hunts(String nameUser);
 }

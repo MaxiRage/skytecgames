@@ -1,10 +1,14 @@
 package app.Repository;
 
+import java.util.List;
+
 public interface UserRepository {
 
     void createNewUser(String nameUser, int skillArena, int skillGamble, int balances);
 
     String getUserName(int idUser);
+
+    int getUserClan(String nameUser);
 
     int getUserId(String nameUser);
 
@@ -12,10 +16,19 @@ public interface UserRepository {
 
     int getSkillArena(String nameUser);
 
+    int getSkillGamble(String nameUser);
+
     void reduceBalanceUsers(int amount, String nameUser);
+
     void increaseBalanceUsers(int amount, String nameUser);
 
-    int getCountRowsUsersTable();
+    List<String> getAllUsers();
 
-    public boolean checkIsPresentUserInBD(String nameUsers);
+    List<String> getAllUsersFromClan();
+
+    boolean checkIsPresentUserInBD(String nameUsers);
+
+    boolean checkUsersMemberClans(String nameUser);
+
+    void userJoinsClan(String nameUser, int idClan);
 }

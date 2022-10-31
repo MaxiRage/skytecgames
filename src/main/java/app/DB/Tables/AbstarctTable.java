@@ -1,7 +1,7 @@
 package app.DB.Tables;
 
 public abstract class AbstarctTable {
-   public String nameTable;
+    public String nameTable;
 
     public String createTable() {
         System.out.println("CREATE TABLE " + nameTable);

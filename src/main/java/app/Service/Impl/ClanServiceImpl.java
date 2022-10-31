@@ -1,22 +1,29 @@
 package app.Service.Impl;
 
+import app.Repository.ClanRepository;
 import app.Repository.DetailsRepository;
+import app.Repository.Impl.ClanRepositoryImpl;
+import app.Repository.Impl.DetailsRepositoryImpl;
+import app.Repository.Impl.TreasuryRepositoryImpl;
+import app.Repository.Impl.UserRepositoryImpl;
 import app.Repository.TreasuryRepository;
 import app.Repository.UserRepository;
 import app.Service.ClanService;
 import app.Utility.EnamActions;
 import lombok.SneakyThrows;
 
-import java.util.concurrent.locks.LockSupport;
-
 public class ClanServiceImpl implements ClanService {
-    private UserRepository userRepository;
-    private TreasuryRepository treasuryRepository;
-    private DetailsRepository detailsRepository;
+    private final UserRepository userRepository = new UserRepositoryImpl();
+    private final TreasuryRepository treasuryRepository = new TreasuryRepositoryImpl();
+    private final DetailsRepository detailsRepository = new DetailsRepositoryImpl();
+    private final ClanRepository clanRepository = new ClanRepositoryImpl();
 
     @SneakyThrows
     @Override
-    public void JoiningClan(String nameUser) {
+    public boolean JoiningClan(String nameUser) {
+
+        if (userRepository.checkUsersMemberClans(nameUser)) return true;
+
         int rateFee = 2;
         int idClan = (int) ((Math.random() * 3) + 1);
 
@@ -26,26 +33,16 @@ public class ClanServiceImpl implements ClanService {
         if (balanceUser > amountForJoining) {
 
             userRepository.reduceBalanceUsers(amountForJoining, nameUser);
-
             treasuryRepository.increaseBalanceTreasury(idClan, amountForJoining);
+            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.JOINING_CLAN), amountForJoining, idClan);
+            userRepository.userJoinsClan(nameUser, idClan);
 
-            detailsRepository.insertTo(nameUser, String.valueOf(EnamActions.JOININGCLAN), amountForJoining, idClan);
-
-            System.out.printf(Thread.currentThread() + " в работе: " +
-                            "Пользователь %s вступил в клан \"PowerRangers\" и заплатил %d в КАЗНУ \n"
+            System.out.printf(Thread.currentThread() + " in work: " +
+                            "User %s joined the clan " + clanRepository.getClanName(idClan) + " and pay %d в treasury \n"
                     , nameUser, amountForJoining);
-        } else {
-            System.out.println(Thread.currentThread() + " в работе: " + "Не хватает средств на членство");
-            // паркуем поток пока у Юзера не будет деньги
-            Runnable task = LockSupport::park;
-            while (balanceUser < amountForJoining) {
-                balanceUser = userRepository.getUserBalance(nameUser);
-                amountForJoining = userRepository.getSkillArena(nameUser) * rateFee;
-            }
-            LockSupport.unpark(new Thread(task));
-
-
-//            JoiningClan(nameUser);
-        }
+            return true;
+        } else
+            System.out.println(Thread.currentThread() + " in work: " + nameUser + " not enough funds for membership");
+        return false;
     }
 }

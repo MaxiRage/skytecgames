@@ -1,34 +1,79 @@
 package app.Utility;
 
 import app.DB.ManagementTables;
+import app.Repository.ClanRepository;
+import app.Repository.Impl.ClanRepositoryImpl;
+import app.Repository.Impl.TreasuryRepositoryImpl;
+import app.Repository.Impl.UserRepositoryImpl;
+import app.Repository.TreasuryRepository;
+import app.Repository.UserRepository;
+import app.Service.ActionsService;
+import app.Service.ClanService;
+import app.Service.Impl.ActionsServiceImpl;
+import app.Service.Impl.ClanServiceImpl;
 import app.Service.Impl.UserServiceImpl;
+import app.Service.UserService;
+import lombok.SneakyThrows;
 
-import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+/***
+ * This class creates and connects to database's. Next, user's, clan's, and treasuries are created and user actions are triggered
+ */
 public class GameApplication {
-    public static void run(int countUsers) throws SQLException {
-        //Connect and create databases
-        ManagementTables createTablesH2 = new ManagementTables();
-        createTablesH2.dropAllTable();
-        createTablesH2.createAllTables();
-//        createTablesH2.truncateAllTable();
 
-        //        Создаём пользователей
-        while (countUsers-- > 0) {
-            Runnable taskCreateUsers = () -> {
-                new UserServiceImpl().createNewUser();
-            };
-            new Thread(taskCreateUsers).start();
-        }
+    @SneakyThrows
+    public static void run(int countUsers) {
+        //Connect and create database's
+        ManagementTables managementTables = new ManagementTables();
+        managementTables.dropAllTable();
+        managementTables.createAllTables();
 
-//        Создаём кланы + казну
-//        ClanRepository clanRepository = new ClanRepositoryImpl();
-//        final String[] nameClans = {"PowerRangers", "MadWolves", "ForestElves"};
-//        Arrays.stream(nameClans)
-//                .forEach(nameClan -> clanRepository.createClan(nameClan));
+        ClanRepository clanRepository = new ClanRepositoryImpl();
+        TreasuryRepository treasuryRepository = new TreasuryRepositoryImpl();
+        UserRepository userRepository = new UserRepositoryImpl();
 
-        //Пользователи выполняют действия
-        //TODO до того, как юзеры создаются они уже идут играть и нет денег на членство -> сделать ожидание потока денег
-//        new ActionPipeline().start();
+        UserService userService = new UserServiceImpl();
+        ActionsService actionsService = new ActionsServiceImpl();
+        ClanService clanService = new ClanServiceImpl();
+
+
+        ExecutorService executors = Executors.newCachedThreadPool();
+
+        //Create clans and treasury's
+        final String[] nameClans = {"PowerRangers", "MadWolves", "ForestElves"};
+        Arrays.stream(nameClans)
+                .parallel()
+                .forEach(nameClan -> {
+                    clanRepository.createClan(nameClan);
+                    int idClans = clanRepository.getClanId(nameClan);
+                    treasuryRepository.createNewTreasury(idClans, nameClan);
+                });
+
+        //Create user's
+        while (countUsers-- > 0)
+            executors.submit(userService::createNewUser);
+
+        //Users join a clan
+        Thread.sleep(1000); //to work correctly with all users
+        userRepository.getAllUsers()
+                .stream()
+                .parallel()
+                .forEach(clanService::JoiningClan);
+
+        //Users perform action's
+        Thread.sleep(1000); //to work correctly with all users
+        userRepository.getAllUsers()
+                .stream()
+                .parallel()
+                .forEach(nameUser -> {
+                            int randomCountActions = (int) (Math.random() * 10) + 1;
+                            while (randomCountActions-- > 0)
+                                actionsService.runGames(nameUser);
+                        }
+                );
+        executors.shutdown();
     }
 }

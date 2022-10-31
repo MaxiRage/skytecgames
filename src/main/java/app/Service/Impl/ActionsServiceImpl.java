@@ -160,7 +160,7 @@ public class ActionsServiceImpl implements ActionsService {
                 userRepository.increaseBalanceUsers(winPaycheck - deductTreasury, nameOpponent);
                 detailsRepository.insertTo(nameOpponent, String.valueOf(EnamActions.GAMBLES_DEDUCT), deductTreasury, idTreasuryOpponent);
 //                treasuryRepository.increaseBalanceTreasury(idTreasuryOpponent, deductTreasury);
-                System.out.println(Thread.currentThread() + " is working: " + "Игрок " + nameUser + " loser playing cards " + skillUser + " : " + skillOpponent +
+                System.out.println(Thread.currentThread() + " is working: " + nameUser + " loser playing cards " + skillUser + " : " + skillOpponent +
                         " " + nameOpponent);
             }
         } else
